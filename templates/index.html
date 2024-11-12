@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EEG Seizure Prediction</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+  </head>
+  <body>
+    <div class="container" id="uploadForm">
+      <input type="file" id="file-upload" accept=".edf" />
+      <button id="file-upload-btn">Upload File</button>
+    </div>
+
+    <div class="results">
+      <div class="plot container" id="plot">
+        <h2 class="warning" id="plot-warning">
+          UPLOAD AN EDF FILE TO SEE THE PLOT
+        </h2>
+        <button id="plot-btn">Plot the uploaded EDF file</button>
+        <!-- <div class="loader"></div> -->
+      </div>
+      <div id="predict" class="predict container">
+        <div id="progress"></div>
+        <!-- Displaying predictions -->
+        <div id="intiator">
+          <h2 class="warning" id="process-warning">
+            UPLOAD AN EDF FILE FOR SEIZURE DETECTION
+          </h2>
+          <button id="process-btn">
+            Process EDF file for seizure detection
+          </button>
+          <div id="predictions" class="results">
+            <div class="progress-container">
+              <!-- Progress: <span id="progress-text">0%</span> -->
+              <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <!-- Seizure Events Table -->
+            <h3>Seizure Events</h3>
+            <br>
+            <table id="seizure-events-table">
+              <thead>
+                <tr>
+                  <th>Start Time</th>
+                  <th>End Time</th>
+                  <th>Type</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+
+            <br><br>
+            <!-- Non-Seizure Events Table -->
+            <h3>Non-Seizure Events</h3>
+            <br>
+            <table id="non-seizure-events-table">
+              <thead>
+                <tr>
+                  <th>Start Time</th>
+                  <th>End Time</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='main.js') }}"
+    ></script>
+  </body>
+</html>
